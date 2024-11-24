@@ -165,6 +165,7 @@ enum Color {
      //% block="Initialize TFT Display"
      //% weight=100
      export function init(): void {
+         //pins.digitalWritePin(DigitalPin.P1, 0)
          // set RESET high
          pins.digitalWritePin(DigitalPin.P8, 1)
          // set SPI frequency
