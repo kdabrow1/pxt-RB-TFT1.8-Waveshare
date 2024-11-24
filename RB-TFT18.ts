@@ -113,14 +113,14 @@ enum Color {
       */
      function send(command: TFTCommands, parameter: Array<number>): void {
          // set TFT to command-receive mode
-         pins.digitalWritePin(DigitalPin.P1, 0)
+         pins.digitalWritePin(DigitalPin.P12, 0)
          // select TFT controller
          pins.digitalWritePin(DigitalPin.P16, 0)
          // Send command
          pins.spiWrite(command)
 
          // set TFT back to data-receive mode
-         pins.digitalWritePin(DigitalPin.P1, 1)
+         pins.digitalWritePin(DigitalPin.P12, 1)
 
          for (let item of parameter) {
              pins.spiWrite(item)
@@ -143,12 +143,12 @@ enum Color {
       */
      function enterDataMode(): void {
          // Activate command mode
-         pins.digitalWritePin(DigitalPin.P1, 0)
+         pins.digitalWritePin(DigitalPin.P12, 0)
          // select TFT as SPI-target
          pins.digitalWritePin(DigitalPin.P16, 0)
          pins.spiWrite(TFTCommands.RAMWR)
          // Activate data mode
-         pins.digitalWritePin(DigitalPin.P1, 1)
+         pins.digitalWritePin(DigitalPin.P12, 1)
      }
 
      /*
@@ -156,7 +156,7 @@ enum Color {
       */
      function exitDataMode(): void {
          pins.digitalWritePin(DigitalPin.P16, 1) // de-elect the TFT as SPI target
-         pins.digitalWritePin(DigitalPin.P1, 0) // command/data = command
+         pins.digitalWritePin(DigitalPin.P12, 0) // command/data = command
      }
 
      /*
@@ -165,6 +165,8 @@ enum Color {
      //% block="Initialize TFT Display"
      //% weight=100
      export function init(): void {
+         // set RESET high
+         pins.digitalWritePin(DigitalPin.P8, 1)
          // set SPI frequency
          pins.spiFrequency(4000000)
 
