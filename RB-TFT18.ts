@@ -390,6 +390,12 @@ enum Color {
          drawRectangle(0, 0, TFTWIDTH, TFTHEIGHT, 0)
      }
 
+     //% block="Clear screen white"
+     //% weight=65
+     export function clearScreenWhite(): void {
+         drawRectangle(0, 0, TFTWIDTH, TFTHEIGHT, Color.White)
+     }
+
      //% block="Turn display off"
      //% weight=60
      export function turnOff(): void {
